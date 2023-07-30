@@ -119,5 +119,5 @@ python inference/hf-text-generation-inference/merge_lora_weights.py \
 ## 6、存在问题
 
 - 尽量做全量或半精度微调，Lora的效果一般
-- 本项目中，由于算力限制，max_token_size设置的比较小（128），精度也低（4bit）所以生成的可能不完整
+- 本项目中，由于算力限制，max_token_size设置的比较小（256），精度也低（4bit）所以生成的可能不完整
 - 语料不宜过多，但要求质量要高，5万多条（51K）效果好

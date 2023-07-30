@@ -55,7 +55,7 @@ def stream_item(
     top_p=0.75,
     top_k=40,
     num_beams=1,
-    max_new_tokens=128,
+    max_new_tokens=256,
     **kwargs,
 ):
     global model
