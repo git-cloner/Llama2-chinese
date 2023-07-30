@@ -1,14 +1,15 @@
 # LLaMA2中文微调
 
-LLaMA2模型的许可证的变化，已允许商用，模型推出时，LLaMA2-Chat也同时推出，本人在16G推理卡上实践了微调Llama-2-7b-chat（ https://zhuanlan.zhihu.com/p/645152512 ，代码在 https://github.com/git-cloner/llama2-lora-fine-tuning ），但即使扩充了中文词表，推理效果依然不佳，回答主要以英文为主。
+LLaMA2模型的许可证发生了变化，已允许商用，模型推出时，LLaMA2-Chat也同时推出，本人在16G推理卡上实践了微调Llama-2-7b-chat（ https://zhuanlan.zhihu.com/p/645152512 ，代码在 https://github.com/git-cloner/llama2-lora-fine-tuning ），但即使扩充了中文词表，推理效果依然不佳，回答主要以英文为主。
 
 官方在LLaMA2模型发布时，就已开源了官方微调程序，叫做LLaMA伴侣（ https://github.com/facebookresearch/llama-recipes ），支持全量、Lora等方式微调，相对来说兼容性优于第三方的程序。
 
-本文是在llama-recipes的基础上，修改适配显卡资源，基于Lora的微调实践，效果尚可，并给出来测试过程和流式接口。
+本文是在llama-recipes的基础上，修改适配显卡资源，基于Lora对LLaMA2-7b原始模型进行微调实践，结果推理效果尚可，本项目也提供了测试过程和流式接口。
 
-LLaMA2中文微调的效果可在Aiit-Chat查看，链接地址为： https://gitclone.com/aiit/chat/ 。
+- LLaMA2中文微调的效果可在Aiit-Chat查看，链接地址为： https://gitclone.com/aiit/chat/ 。
 
-## 1、显卡要求
+
+## 1、推理卡要求
 
 16G及以上，最好有两块以上。
 
@@ -97,7 +98,7 @@ CUDA_VISIBLE_DEVICES=0 nohup python -u api_stream.py \
 tail -f api_stream.log
 ```
 
-### 4.2 测试
+### 4.2 测试API
 
 ```bash
 # 多次发POST请求，直到返回的response中包含[stop]后停止调用
