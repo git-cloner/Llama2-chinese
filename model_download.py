@@ -6,6 +6,7 @@ import requests
 import json
 import os
 from huggingface_hub import snapshot_download
+import platform
 
 
 def _log(_repo_id, _type, _msg):
@@ -21,9 +22,13 @@ def _download_model(_repo_id):
     except Exception as e:
         return False, "check_Complete exception," + str(e)
     _cache_dir = 'caches/' + _repo_id
+
+    _local_dir_use_symlinks = True
+    if platform.system().lower() == 'windows':
+        _local_dir_use_symlinks = False
     try:
-        result = snapshot_download(repo_id=_repo_id, cache_dir=_cache_dir, local_dir=_local_dir, local_dir_use_symlinks=False,
-                                   resume_download=True)
+        snapshot_download(repo_id=_repo_id, cache_dir=_cache_dir, local_dir=_local_dir, local_dir_use_symlinks=_local_dir_use_symlinks,
+                          resume_download=True)
     except Exception as e:
         error_msg = str(e)
         if ("401 Client Error" in error_msg):
